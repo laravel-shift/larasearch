@@ -3,8 +3,8 @@
 namespace Tests;
 
 use Mockery;
-use Laravel\Scout\Builder;
-use Laravel\Scout\Engines\AlgoliaEngine;
+use Gtk\Scout\Builder;
+use Gtk\Scout\Engines\AlgoliaEngine;
 use Tests\Fixtures\AlgoliaEngineTestModel;
 use Illuminate\Database\Eloquent\Collection;
 

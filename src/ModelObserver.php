@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravel\Scout;
+namespace Gtk\Scout;
 
 class ModelObserver
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravel\Scout\Events;
+namespace Gtk\Scout\Events;
 
 class ModelsImported
 {

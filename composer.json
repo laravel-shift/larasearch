@@ -1,6 +1,6 @@
 {
     "name": "gtk/laravel52-scout",
-    "description": "Laravel Scout provides a driver based solution to searching your Eloquent models.",
+    "description": "A driver based solution to searching your Eloquent models supports Laravel 5.2.",
     "keywords": [
         "algolia",
         "laravel",
@@ -9,8 +9,8 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Taylor Otwell",
-            "email": "taylor@laravel.com"
+            "name": "Giang Thai Cuong",
+            "email": "thaicuong.giang@gmail.com"
         }
     ],
     "require": {
@@ -29,7 +29,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Laravel\\Scout\\": "src/"
+            "Gtk\\Scout\\": "src/"
         }
     },
     "autoload-dev": {

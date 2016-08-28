@@ -3,7 +3,7 @@
 namespace Tests;
 
 use Mockery;
-use Laravel\Scout\ModelObserver;
+use Gtk\Scout\ModelObserver;
 
 class ModelObserverTest extends AbstractTestCase
 {

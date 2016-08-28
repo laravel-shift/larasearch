@@ -1,9 +1,9 @@
 <?php
 
-namespace Laravel\Scout\Console;
+namespace Gtk\Scout\Console;
 
 use Illuminate\Console\Command;
-use Laravel\Scout\Events\ModelsImported;
+use Gtk\Scout\Events\ModelsImported;
 use Illuminate\Contracts\Events\Dispatcher;
 
 class ImportCommand extends Command

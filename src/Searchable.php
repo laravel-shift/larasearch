@@ -1,8 +1,8 @@
 <?php
 
-namespace Laravel\Scout;
+namespace Gtk\Scout;
 
-use Laravel\Scout\Jobs\MakeSearchable;
+use Gtk\Scout\Jobs\MakeSearchable;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Collection as BaseCollection;
 

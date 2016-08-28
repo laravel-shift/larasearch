@@ -1,9 +1,9 @@
 <?php
 
-namespace Laravel\Scout;
+namespace Gtk\Scout;
 
 use Illuminate\Support\ServiceProvider;
-use Laravel\Scout\Console\ImportCommand;
+use Gtk\Scout\Console\ImportCommand;
 
 class ScoutServiceProvider extends ServiceProvider
 {

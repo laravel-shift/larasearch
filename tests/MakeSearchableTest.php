@@ -3,7 +3,7 @@
 namespace Tests;
 
 use Mockery;
-use Laravel\Scout\Jobs\MakeSearchable;
+use Gtk\Scout\Jobs\MakeSearchable;
 use Illuminate\Database\Eloquent\Collection;
 
 class MakeSearchableTest extends AbstractTestCase

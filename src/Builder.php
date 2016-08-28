@@ -1,8 +1,8 @@
 <?php
 
-namespace Laravel\Scout;
+namespace Gtk\Scout;
 
-use Laravel\Scout\Paginator;
+use Gtk\Scout\Paginator;
 use Illuminate\Database\Eloquent\Collection;
 
 class Builder

@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravel\Scout\Jobs;
+namespace Gtk\Scout\Jobs;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;

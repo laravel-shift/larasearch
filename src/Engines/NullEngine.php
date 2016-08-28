@@ -1,8 +1,8 @@
 <?php
 
-namespace Laravel\Scout\Engines;
+namespace Gtk\Scout\Engines;
 
-use Laravel\Scout\Builder;
+use Gtk\Scout\Builder;
 use Illuminate\Database\Eloquent\Collection;
 
 class NullEngine extends Engine
@@ -32,7 +32,7 @@ class NullEngine extends Engine
     /**
      * Perform the given search on the engine.
      *
-     * @param  \Laravel\Scout\Builder  $builder
+     * @param  \Gtk\Scout\Builder  $builder
      * @return mixed
      */
     public function search(Builder $builder)
@@ -43,7 +43,7 @@ class NullEngine extends Engine
     /**
      * Perform the given search on the engine.
      *
-     * @param  \Laravel\Scout\Builder  $builder
+     * @param  \Gtk\Scout\Builder  $builder
      * @param  int  $perPage
      * @param  int  $page
      * @return mixed

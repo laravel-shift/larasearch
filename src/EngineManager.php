@@ -1,11 +1,11 @@
 <?php
 
-namespace Laravel\Scout;
+namespace Gtk\Scout;
 
 use Illuminate\Support\Manager;
 use AlgoliaSearch\Client as Algolia;
-use Laravel\Scout\Engines\NullEngine;
-use Laravel\Scout\Engines\AlgoliaEngine;
+use Gtk\Scout\Engines\NullEngine;
+use Gtk\Scout\Engines\AlgoliaEngine;
 
 class EngineManager extends Manager
 {
@@ -23,7 +23,7 @@ class EngineManager extends Manager
     /**
      * Create an Algolia engine instance.
      *
-     * @return \Laravel\Scout\Engines\AlgoliaEngine
+     * @return \Gtk\Scout\Engines\AlgoliaEngine
      */
     public function createAlgoliaDriver()
     {
@@ -35,7 +35,7 @@ class EngineManager extends Manager
     /**
      * Create a Null engine instance.
      *
-     * @return \Laravel\Scout\Engines\NullEngine
+     * @return \Gtk\Scout\Engines\NullEngine
      */
     public function createNullDriver()
     {

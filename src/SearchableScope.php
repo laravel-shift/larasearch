@@ -1,10 +1,10 @@
 <?php
 
-namespace Laravel\Scout;
+namespace Gtk\Scout;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Scope;
-use Laravel\Scout\Events\ModelsImported;
+use Gtk\Scout\Events\ModelsImported;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 
 class SearchableScope implements Scope

@@ -4,7 +4,7 @@ namespace Tests;
 
 use Mockery;
 use StdClass;
-use Laravel\Scout\Builder;
+use Gtk\Scout\Builder;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Collection;
 
