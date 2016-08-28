@@ -22,6 +22,13 @@ class Builder
     public $query;
 
     /**
+     * The query key name.
+     *
+     * @var string
+     */
+    public $key;
+
+    /**
      * The custom index specified for the search.
      *
      * @var string
@@ -49,10 +56,11 @@ class Builder
      * @param  string  $query
      * @return void
      */
-    public function __construct($model, $query)
+    public function __construct($model, $query, $key)
     {
         $this->model = $model;
         $this->query = $query;
+        $this->key = $key;
     }
 
     /**
@@ -138,8 +146,8 @@ class Builder
             'pageName' => $pageName,
         ]));
 
-        return $paginator->appends('query', $this->query)
-                         ->hasMorePagesWhen(($results->count() / $perPage) > $page);
+        return $paginator->appends($this->key, $this->query)
+                         ->hasMorePagesWhen(($rawResults['nbHits'] / $perPage) > $page);
     }
 
     /**

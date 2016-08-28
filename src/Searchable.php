@@ -71,11 +71,12 @@ trait Searchable
      * Perform a search against the model's indexed data.
      *
      * @param  string  $query
+     * @param  string  $key
      * @return \Illuminate\Support\Collection
      */
-    public static function search($query)
+    public static function search($query, $key = 'query')
     {
-        return new Builder(new static, $query);
+        return new Builder(new static, $query, $key);
     }
 
     /**
