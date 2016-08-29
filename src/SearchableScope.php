@@ -2,9 +2,9 @@
 
 namespace Gtk\Scout;
 
+use Gtk\Scout\Events\ModelsImported;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Scope;
-use Gtk\Scout\Events\ModelsImported;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 
 class SearchableScope implements Scope

@@ -76,11 +76,15 @@ class AlgoliaEngine extends Engine
      */
     public function paginate(Builder $builder, $perPage, $page)
     {
-        return $this->performSearch($builder, [
+        $results = $this->performSearch($builder, [
             'numericFilters' => $this->filters($builder),
             'hitsPerPage' => $perPage,
             'page' => $page - 1,
         ]);
+
+        $builder->total = $results['nbHits'];
+
+        return $results;
     }
 
     /**

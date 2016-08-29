@@ -43,6 +43,13 @@ class Builder
     public $limit;
 
     /**
+     * The "total" of the search results.
+     *
+     * @var int
+     */
+    public $total;
+
+    /**
      * Create a new search builder instance.
      *
      * @param  \Illuminate\Database\Eloquent\Model  $model
@@ -139,7 +146,7 @@ class Builder
         ]));
 
         return $paginator->appends('query', $this->query)
-                         ->hasMorePagesWhen(($rawResults['nbHits'] / $perPage) > $page);
+                         ->hasMorePagesWhen(($this->total / $perPage) > $page);
     }
 
     /**

@@ -3,9 +3,10 @@
 namespace Gtk\Scout;
 
 use Illuminate\Support\Manager;
-use AlgoliaSearch\Client as Algolia;
 use Gtk\Scout\Engines\NullEngine;
+use AlgoliaSearch\Client as Algolia;
 use Gtk\Scout\Engines\AlgoliaEngine;
+use Gtk\Scout\Engines\ElasticEngine;
 
 class EngineManager extends Manager
 {
@@ -30,6 +31,18 @@ class EngineManager extends Manager
         return new AlgoliaEngine(new Algolia(
             config('scout.algolia.id'), config('scout.algolia.secret')
         ));
+    }
+
+    /**
+     * Create an Elastic engine instance.
+     *
+     * @return \Gtk\Scout\Engines\ElasticEngine
+     */
+    public function createElasticDriver()
+    {
+        return new ElasticEngine(
+            ElasticEngine::buildClient(config('scout.elastic')), config('scout.elastic.index')
+        );
     }
 
     /**

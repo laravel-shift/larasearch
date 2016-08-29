@@ -2,8 +2,8 @@
 
 namespace Gtk\Scout;
 
-use Illuminate\Support\ServiceProvider;
 use Gtk\Scout\Console\ImportCommand;
+use Illuminate\Support\ServiceProvider;
 
 class ScoutServiceProvider extends ServiceProvider
 {
