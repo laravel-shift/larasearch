@@ -127,8 +127,7 @@ class AlgoliaEngine extends Engine
             return Collection::make();
         }
 
-        $keys = collect($results['hits'])
-                        ->pluck('objectID')->values()->all();
+        $keys = collect($results['hits'])->pluck('objectID')->values()->all();
 
         $models = $model->whereIn(
             $model->getKeyName(), $keys
