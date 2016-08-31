@@ -82,7 +82,7 @@ class AlgoliaEngine extends Engine
             'page' => $page - 1,
         ]);
 
-        $builder->total = $results['nbHits'];
+        $builder->total = $results['nbHits'] ? : $results->count();
 
         return $results;
     }
@@ -134,7 +134,9 @@ class AlgoliaEngine extends Engine
         )->get()->keyBy($model->getKeyName());
 
         return collect($results['hits'])->map(function ($hit) use ($model, $models) {
-            return $models[$hit[$model->getKeyName()]];
-        });
+            $key = $hit[$model->getKeyName()];
+
+            return isset($models[$key]) ? $models[$key] : null;
+        })->filter();
     }
 }

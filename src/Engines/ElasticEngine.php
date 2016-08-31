@@ -122,7 +122,7 @@ class ElasticEngine extends Engine
             'from' => ($page - 1) * $perPage,
         ]);
 
-        $builder->total = $results['hits']['total'];
+        $builder->total = $results['hits']['total'] ? : $results->count();
 
         return $results;
     }
@@ -203,7 +203,9 @@ class ElasticEngine extends Engine
         )->get()->keyBy($model->getKeyName());
 
         return collect($results['hits']['hits'])->map(function ($hit) use ($model, $models) {
-            return $models[$hit['_source'][$model->getKeyName()]];
-        });
+            $key = $hit['_source'][$model->getKeyName()];
+
+            return isset($models[$key]) ? $models[$key] : null;
+        })->filter();
     }
 }
