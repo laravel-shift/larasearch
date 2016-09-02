@@ -60,4 +60,4 @@ Since Larasearch searches return a collection of Eloquent models, you may even r
     
 ## License
 
-Larasearch is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+Larasearch is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
