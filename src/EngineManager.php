@@ -29,7 +29,7 @@ class EngineManager extends Manager
     public function createAlgoliaDriver()
     {
         return new AlgoliaEngine(new Algolia(
-            config('scout.algolia.id'), config('scout.algolia.secret')
+            config('larasearch.algolia.id'), config('larasearch.algolia.secret')
         ));
     }
 
@@ -41,7 +41,7 @@ class EngineManager extends Manager
     public function createElasticDriver()
     {
         return new ElasticEngine(
-            ElasticEngine::buildClient(config('scout.elastic')), config('scout.elastic.index')
+            ElasticEngine::buildClient(config('larasearch.elastic')), config('larasearch.elastic.index')
         );
     }
 
@@ -62,6 +62,6 @@ class EngineManager extends Manager
      */
     public function getDefaultDriver()
     {
-        return $this->app['config']['scout.driver'];
+        return $this->app['config']['larasearch.driver'];
     }
 }

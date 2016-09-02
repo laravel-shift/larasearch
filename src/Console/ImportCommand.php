@@ -13,7 +13,7 @@ class ImportCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'scout:import {model}';
+    protected $signature = 'larasearch:import {model}';
 
     /**
      * The console command description.

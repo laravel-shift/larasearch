@@ -48,7 +48,7 @@ trait Searchable
      */
     public function queueMakeSearchable($models)
     {
-        if (! config('scout.queue')) {
+        if (! config('larasearch.queue')) {
             return $models->first()->searchableUsing()->update($models);
         }
 
@@ -160,7 +160,7 @@ trait Searchable
      */
     public function searchableAs()
     {
-        return config('scout.prefix').$this->getTable();
+        return config('larasearch.prefix').$this->getTable();
     }
 
     /**

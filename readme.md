@@ -16,7 +16,7 @@ Next, you should add the `LarasearchServiceProvider` to the `providers` array of
 
     Gtk\Larasearch\LarasearchServiceProvider::class,
 
-After registering the Larasearch service provider, you should publish the Larasearch configuration using the `vendor:publish` Artisan command. This command will publish the `scout.php` configuration file to your `config` directory:
+After registering the Larasearch service provider, you should publish the Larasearch configuration using the `vendor:publish` Artisan command. This command will publish the `larasearch.php` configuration file to your `config` directory:
 
     php artisan vendor:publish
 
@@ -36,7 +36,7 @@ Finally, add the `Gtk\Larasearch\Searchable` trait to the model you would like t
 
 ## Searching with Elastic
 
-When using the Elastic driver, you should configure your Elastic `index` and `hosts` credentials in your `config/scout.php` configuration file. Once your credentials have been configured, you will also need to install the Elastic PHP SDK via the Composer package manager:
+When using the Elastic driver, you should configure your Elastic `index` and `hosts` credentials in your `config/larasearch.php` configuration file. Once your credentials have been configured, you will also need to install the Elastic PHP SDK via the Composer package manager:
 
     composer require elasticsearch/elasticsearch
     

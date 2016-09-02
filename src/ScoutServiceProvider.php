@@ -24,7 +24,7 @@ class LarasearchServiceProvider extends ServiceProvider
             ]);
 
             $this->publishes([
-                __DIR__.'/../config/scout.php' => config_path('scout.php'),
+                __DIR__.'/../config/larasearch.php' => config_path('larasearch.php'),
             ]);
         }
     }
