@@ -82,7 +82,7 @@ class AlgoliaEngine extends Engine
             'page' => $page - 1,
         ]);
 
-        $builder->total = $results['nbHits'] ? : $results->count();
+        $builder->total = $results['nbHits'];
 
         return $results;
     }

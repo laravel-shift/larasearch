@@ -122,7 +122,7 @@ class ElasticEngine extends Engine
             'from' => ($page - 1) * $perPage,
         ]);
 
-        $builder->total = $results['hits']['total'] ? : $results->count();
+        $builder->total = $results['hits']['total'];
 
         return $results;
     }
