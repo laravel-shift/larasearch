@@ -4,7 +4,7 @@ namespace Tests;
 
 use Mockery;
 use StdClass;
-use Gtk\Scout\Builder;
+use Gtk\Larasearch\Builder;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Collection;
 

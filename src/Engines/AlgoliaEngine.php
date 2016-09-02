@@ -1,8 +1,8 @@
 <?php
 
-namespace Gtk\Scout\Engines;
+namespace Gtk\Larasearch\Engines;
 
-use Gtk\Scout\Builder;
+use Gtk\Larasearch\Builder;
 use AlgoliaSearch\Client as Algolia;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -55,7 +55,7 @@ class AlgoliaEngine extends Engine
     /**
      * Perform the given search on the engine.
      *
-     * @param  \Gtk\Scout\Builder  $builder
+     * @param  \Gtk\Larasearch\Builder  $builder
      * @return mixed
      */
     public function search(Builder $builder)
@@ -69,7 +69,7 @@ class AlgoliaEngine extends Engine
     /**
      * Perform the given search on the engine.
      *
-     * @param  \Gtk\Scout\Builder  $builder
+     * @param  \Gtk\Larasearch\Builder  $builder
      * @param  int  $perPage
      * @param  int  $page
      * @return mixed
@@ -90,7 +90,7 @@ class AlgoliaEngine extends Engine
     /**
      * Perform the given search on the engine.
      *
-     * @param  \Gtk\Scout\Builder  $builder
+     * @param  \Gtk\Larasearch\Builder  $builder
      * @param  array  $options
      * @return mixed
      */
@@ -104,7 +104,7 @@ class AlgoliaEngine extends Engine
     /**
      * Get the filter array for the query.
      *
-     * @param  \Gtk\Scout\Builder  $builder
+     * @param  \Gtk\Larasearch\Builder  $builder
      * @return array
      */
     protected function filters(Builder $builder)

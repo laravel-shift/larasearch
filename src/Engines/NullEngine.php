@@ -1,8 +1,8 @@
 <?php
 
-namespace Gtk\Scout\Engines;
+namespace Gtk\Larasearch\Engines;
 
-use Gtk\Scout\Builder;
+use Gtk\Larasearch\Builder;
 use Illuminate\Database\Eloquent\Collection;
 
 class NullEngine extends Engine
@@ -32,7 +32,7 @@ class NullEngine extends Engine
     /**
      * Perform the given search on the engine.
      *
-     * @param  \Gtk\Scout\Builder  $builder
+     * @param  \Gtk\Larasearch\Builder  $builder
      * @return mixed
      */
     public function search(Builder $builder)
@@ -43,7 +43,7 @@ class NullEngine extends Engine
     /**
      * Perform the given search on the engine.
      *
-     * @param  \Gtk\Scout\Builder  $builder
+     * @param  \Gtk\Larasearch\Builder  $builder
      * @param  int  $perPage
      * @param  int  $page
      * @return mixed

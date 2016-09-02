@@ -1,8 +1,8 @@
 <?php
 
-namespace Gtk\Scout;
+namespace Gtk\Larasearch;
 
-use Gtk\Scout\Events\ModelsImported;
+use Gtk\Larasearch\Events\ModelsImported;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Scope;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;

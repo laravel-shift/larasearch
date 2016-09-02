@@ -1,9 +1,9 @@
 <?php
 
-namespace Gtk\Scout\Console;
+namespace Gtk\Larasearch\Console;
 
 use Illuminate\Console\Command;
-use Gtk\Scout\Events\ModelsImported;
+use Gtk\Larasearch\Events\ModelsImported;
 use Illuminate\Contracts\Events\Dispatcher;
 
 class ImportCommand extends Command

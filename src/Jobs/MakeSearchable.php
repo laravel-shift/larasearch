@@ -1,6 +1,6 @@
 <?php
 
-namespace Gtk\Scout\Jobs;
+namespace Gtk\Larasearch\Jobs;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;

@@ -1,8 +1,8 @@
 <?php
 
-namespace Gtk\Scout;
+namespace Gtk\Larasearch;
 
-use Gtk\Scout\Jobs\MakeSearchable;
+use Gtk\Larasearch\Jobs\MakeSearchable;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Collection as BaseCollection;
 
@@ -174,7 +174,7 @@ trait Searchable
     }
 
     /**
-     * Get the Scout engine for the model.
+     * Get the Larasearch engine for the model.
      *
      * @return mixed
      */

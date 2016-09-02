@@ -1,8 +1,8 @@
 <?php
 
-namespace Gtk\Scout;
+namespace Gtk\Larasearch;
 
-use Gtk\Scout\Paginator;
+use Gtk\Larasearch\Paginator;
 use Illuminate\Database\Eloquent\Collection;
 
 class Builder

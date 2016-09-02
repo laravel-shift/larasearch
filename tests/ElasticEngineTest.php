@@ -3,8 +3,8 @@
 namespace Tests;
 
 use Mockery;
-use Gtk\Scout\Builder;
-use Gtk\Scout\Engines\ElasticEngine;
+use Gtk\Larasearch\Builder;
+use Gtk\Larasearch\Engines\ElasticEngine;
 use Tests\Fixtures\ElasticEngineTestModel;
 use Illuminate\Database\Eloquent\Collection;
 

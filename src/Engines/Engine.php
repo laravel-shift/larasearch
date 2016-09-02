@@ -1,8 +1,8 @@
 <?php
 
-namespace Gtk\Scout\Engines;
+namespace Gtk\Larasearch\Engines;
 
-use Gtk\Scout\Builder;
+use Gtk\Larasearch\Builder;
 use Illuminate\Database\Eloquent\Collection;
 
 abstract class Engine
@@ -26,7 +26,7 @@ abstract class Engine
     /**
      * Perform the given search on the engine.
      *
-     * @param  \Gtk\Scout\Builder  $builder
+     * @param  \Gtk\Larasearch\Builder  $builder
      * @return mixed
      */
     abstract public function search(Builder $builder);
@@ -34,7 +34,7 @@ abstract class Engine
     /**
      * Perform the given search on the engine.
      *
-     * @param  \Gtk\Scout\Builder  $builder
+     * @param  \Gtk\Larasearch\Builder  $builder
      * @param  int  $perPage
      * @param  int  $page
      * @return mixed
@@ -53,7 +53,7 @@ abstract class Engine
     /**
      * Get the results of the given query mapped onto models.
      *
-     * @param  \Gtk\Scout\Builder  $builder
+     * @param  \Gtk\Larasearch\Builder  $builder
      * @return Collection
      */
     public function get(Builder $builder)

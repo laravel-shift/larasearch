@@ -1,6 +1,6 @@
 <?php
 
-namespace Gtk\Scout;
+namespace Gtk\Larasearch;
 
 class ModelObserver
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace Gtk\Scout;
+namespace Gtk\Larasearch;
 
-use Gtk\Scout\Console\ImportCommand;
+use Gtk\Larasearch\Console\ImportCommand;
 use Illuminate\Support\ServiceProvider;
 
-class ScoutServiceProvider extends ServiceProvider
+class LarasearchServiceProvider extends ServiceProvider
 {
     /**
      * Register the service provider.

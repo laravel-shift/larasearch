@@ -1,9 +1,9 @@
 <?php
 
-namespace Gtk\Scout\Engines;
+namespace Gtk\Larasearch\Engines;
 
 use Closure;
-use Gtk\Scout\Builder;
+use Gtk\Larasearch\Builder;
 use Psr\Log\LoggerInterface;
 use Elasticsearch\ClientBuilder;
 use Elasticsearch\Client as Elastic;
@@ -99,7 +99,7 @@ class ElasticEngine extends Engine
     /**
      * Perform the given search on the engine.
      *
-     * @param  \Gtk\Scout\Builder  $builder
+     * @param  \Gtk\Larasearch\Builder  $builder
      * @return mixed
      */
     public function search(Builder $builder)
@@ -110,7 +110,7 @@ class ElasticEngine extends Engine
     /**
      * Perform the given search on the engine.
      *
-     * @param  \Gtk\Scout\Builder  $builder
+     * @param  \Gtk\Larasearch\Builder  $builder
      * @param  int  $perPage
      * @param  int  $page
      * @return mixed
@@ -160,7 +160,7 @@ class ElasticEngine extends Engine
     /**
      * Perform the given search on the engine.
      *
-     * @param  \Gtk\Scout\Builder  $builder
+     * @param  \Gtk\Larasearch\Builder  $builder
      * @param  array  $options
      * @return mixed
      */

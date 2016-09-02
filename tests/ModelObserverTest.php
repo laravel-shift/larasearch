@@ -3,7 +3,7 @@
 namespace Tests;
 
 use Mockery;
-use Gtk\Scout\ModelObserver;
+use Gtk\Larasearch\ModelObserver;
 
 class ModelObserverTest extends AbstractTestCase
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Gtk\Scout\Events;
+namespace Gtk\Larasearch\Events;
 
 class ModelsImported
 {

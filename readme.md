@@ -1,32 +1,32 @@
-# Laravel 5.2 Scout
+# Larasearch
 
 ## Introduction
 
 This package is forked from [Laravel Scout](https://github.com/laravel/scout).
 
-Laravel 5.2 Scout based on the official Laravel Scout which provides a simple, driver based solution for adding full-text search to your Eloquent models to supports Laravel 5.2 and [Elasticsearch](https://www.elastic.co/) Engine.
+Larasearch based on the official Laravel Scout which provides a simple, driver based solution for adding full-text search to your Eloquent models to supports Laravel 5.2 and [Elasticsearch](https://www.elastic.co/) Engine.
 
 ## Installation
 
-First, install the Scout via the Composer package manager:
+First, install the Larasearch via the Composer package manager:
 
-    composer require gtk/laravel52-scout
+    composer require gtk/larasearch
 
-Next, you should add the `ScoutServiceProvider` to the `providers` array of your `config/app.php` configuration file:
+Next, you should add the `LarasearchServiceProvider` to the `providers` array of your `config/app.php` configuration file:
 
-    Gtk\Scout\ScoutServiceProvider::class,
+    Gtk\Larasearch\LarasearchServiceProvider::class,
 
-After registering the Scout service provider, you should publish the Scout configuration using the `vendor:publish` Artisan command. This command will publish the `scout.php` configuration file to your `config` directory:
+After registering the Larasearch service provider, you should publish the Larasearch configuration using the `vendor:publish` Artisan command. This command will publish the `scout.php` configuration file to your `config` directory:
 
     php artisan vendor:publish
 
-Finally, add the `Gtk\Scout\Searchable` trait to the model you would like to make searchable. This trait will register a model observer to keep the model in sync with your search driver:
+Finally, add the `Gtk\Larasearch\Searchable` trait to the model you would like to make searchable. This trait will register a model observer to keep the model in sync with your search driver:
 
     <?php
 
     namespace App;
 
-    use Gtk\Scout\Searchable;
+    use Gtk\Larasearch\Searchable;
     use Illuminate\Database\Eloquent\Model;
 
     class Post extends Model
@@ -44,7 +44,7 @@ You may begin searching a model using the `search` method. The search method acc
 
     $orders = App\Order::search(['query' => ['match' => ['title' => 'Star Trek']]])->get();
 
-Since Laravel 5.2 Scout searches return a collection of Eloquent models, you may even return the results directly from a route or controller and they will automatically be converted to JSON:
+Since Larasearch searches return a collection of Eloquent models, you may even return the results directly from a route or controller and they will automatically be converted to JSON:
 
     use Illuminate\Http\Request;
 
@@ -54,4 +54,4 @@ Since Laravel 5.2 Scout searches return a collection of Eloquent models, you may
     
 ## License
 
-Laravel 5.2 Scout is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+Larasearch is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)

@@ -1,12 +1,12 @@
 <?php
 
-namespace Gtk\Scout;
+namespace Gtk\Larasearch;
 
 use Illuminate\Support\Manager;
-use Gtk\Scout\Engines\NullEngine;
+use Gtk\Larasearch\Engines\NullEngine;
 use AlgoliaSearch\Client as Algolia;
-use Gtk\Scout\Engines\AlgoliaEngine;
-use Gtk\Scout\Engines\ElasticEngine;
+use Gtk\Larasearch\Engines\AlgoliaEngine;
+use Gtk\Larasearch\Engines\ElasticEngine;
 
 class EngineManager extends Manager
 {
@@ -24,7 +24,7 @@ class EngineManager extends Manager
     /**
      * Create an Algolia engine instance.
      *
-     * @return \Gtk\Scout\Engines\AlgoliaEngine
+     * @return \Gtk\Larasearch\Engines\AlgoliaEngine
      */
     public function createAlgoliaDriver()
     {
@@ -36,7 +36,7 @@ class EngineManager extends Manager
     /**
      * Create an Elastic engine instance.
      *
-     * @return \Gtk\Scout\Engines\ElasticEngine
+     * @return \Gtk\Larasearch\Engines\ElasticEngine
      */
     public function createElasticDriver()
     {
@@ -48,7 +48,7 @@ class EngineManager extends Manager
     /**
      * Create a Null engine instance.
      *
-     * @return \Gtk\Scout\Engines\NullEngine
+     * @return \Gtk\Larasearch\Engines\NullEngine
      */
     public function createNullDriver()
     {
