@@ -23,7 +23,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | Here you may specify a prefix that will be applied to all search index
-    | names used by Scout. This prefix may be useful if you have multiple
+    | names used by Larasearch. This prefix may be useful if you have multiple
     | "tenants" or applications sharing the same search infrastructure.
     |
     */
@@ -49,7 +49,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | Here you may configure your Algolia settings. Algolia is a cloud hosted
-    | search engine which works great with Scout out of the box. Just plug
+    | search engine which works great with Larasearch out of the box. Just plug
     | in your application ID and admin API key to get started searching.
     |
     */
