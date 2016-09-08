@@ -8,7 +8,7 @@ use Psr\Log\LoggerInterface;
 use Elasticsearch\ClientBuilder;
 use Elasticsearch\Client as Elastic;
 use Illuminate\Database\Eloquent\Collection;
-use Elasticsearch\Common\Exceptions\Missing404Exception;
+use Illuminate\Support\Collection as BaseCollection;
 use Elasticsearch\Connections\ConnectionFactoryInterface;
 
 class ElasticEngine extends Engine
@@ -22,6 +22,7 @@ class ElasticEngine extends Engine
     public function __construct(Elastic $elastic, $index)
     {
         $this->elastic = $elastic;
+        
         $this->index = $index;
     }
 
@@ -72,15 +73,30 @@ class ElasticEngine extends Engine
      */
     public function update($models)
     {
-        $models->map(function ($model) {
-            $params = $this->getParams($model);
+        $body = new BaseCollection();
 
-            if ($this->getDocument($params)) {
-                return $this->elastic->update(array_merge($params, ['body' => ['doc' => $model->toSearchableArray()]]));
+        $models->each(function ($model) use ($body) {
+            $searchableArray = $model->toSearchableArray();
+
+            if (empty($searchableArray)) {
+                return;
             }
 
-            return $this->elastic->index(array_merge($params, ['body' => $model->toSearchableArray()]));
+            $body->push([
+                'index' => [
+                    '_index' => $this->index,
+                    '_type' => $model->searchableAs(),
+                    '_id' => $model->getKey(),
+                ]
+            ]);
+
+            $body->push($searchableArray);
         });
+
+        $this->elastic->bulk([
+            'refresh' => true,
+            'body' => $body->all(),
+        ]);
     }
 
     /**
@@ -91,9 +107,22 @@ class ElasticEngine extends Engine
      */
     public function delete($models)
     {
-        $models->map(function ($model) {
-            return $this->elastic->delete($this->getParams($model));
+        $body = new BaseCollection();
+
+        $models->each(function ($model) use ($body) {
+            $body->push([
+                'delete' => [
+                    '_index' => $this->index,
+                    '_type' => $model->searchableAs(),
+                    '_id' => $model->getKey(),
+                ]
+            ]);
         });
+
+        $this->elastic->bulk([
+            'refresh' => true,
+            'body' => $body->all(),
+        ]);
     }
 
     /**
@@ -104,7 +133,10 @@ class ElasticEngine extends Engine
      */
     public function search(Builder $builder)
     {
-        return $this->performSearch($builder, ['size' => $builder->limit]);
+        return $this->performSearch($builder, [
+            'filters' => $this->filters($builder),
+            'size' => $builder->limit ?: 10000,
+        ]);
     }
 
     /**
@@ -118,6 +150,7 @@ class ElasticEngine extends Engine
     public function paginate(Builder $builder, $perPage, $page)
     {
         $results = $this->performSearch($builder, [
+            'filters' => $this->filters($builder),
             'size' => $perPage,
             'from' => ($page - 1) * $perPage,
         ]);
@@ -125,36 +158,6 @@ class ElasticEngine extends Engine
         $builder->total = $results['hits']['total'];
 
         return $results;
-    }
-
-    /**
-     * Get params by model.
-     *
-     * @param  \Illuminate\Database\Eloquent\Model $model
-     * @return array
-     */
-    protected function getParams($model)
-    {
-        return [
-            'index' => $this->index,
-            'type' => $model->searchableAs(),
-            'id' => $model->getKey(),
-        ];
-    }
-
-    /**
-     * Get document by given params.
-     *
-     * @param  array $params
-     * @return mixed
-     */
-    protected function getDocument($params)
-    {
-        try {
-            return $this->elastic->get($params);
-        } catch (Missing404Exception $e) {
-            return false;
-        }
     }
 
     /**
@@ -169,7 +172,20 @@ class ElasticEngine extends Engine
         $params = [
             'index' => $this->index,
             'type' => $builder->index ?: $builder->model->searchableAs(),
-            'body' => $builder->query,
+            'body' => [
+                'query' => [
+                    'filtered' => [
+                        'filter' => [
+                            'query' => [
+                                'query_string' => [
+                                    'query' => '*{$query->query}*',
+                                ]
+                            ],
+                        ],
+                        'query' => $options['filters'],
+                    ],
+                ],
+            ],
         ];
 
         if (isset($options['size'])) {
@@ -181,6 +197,31 @@ class ElasticEngine extends Engine
         }
 
         return $this->elastic->search($params);
+    }
+
+    /**
+     * Get the filter array for the query.
+     *
+     * @param  \Gtk\Larasearch\Builder  $builder
+     * @return array
+     */
+    protected function filters(Builder $builder)
+    {
+        $filters = [];
+
+        foreach ($builder->wheres as $field => $value) {
+            $filters[] = [
+                'match' => [
+                    $field => $value,
+                ],
+            ];
+        }
+
+        return empty($filters) ? [] : [
+            'bool' => [
+                'must' => $filters,
+            ]
+        ];
     }
 
     /**
@@ -205,7 +246,9 @@ class ElasticEngine extends Engine
         return collect($results['hits']['hits'])->map(function ($hit) use ($model, $models) {
             $key = $hit['_source'][$model->getKeyName()];
 
-            return isset($models[$key]) ? $models[$key] : null;
+            if (isset($models[$key])) {
+                return $models[$key];
+            }
         })->filter();
     }
 }

@@ -31,8 +31,14 @@ class AlgoliaEngine extends Engine
         $index = $this->algolia->initIndex($models->first()->searchableAs());
 
         $index->addObjects($models->map(function ($model) {
-            return array_merge(['objectID' => $model->getKey()], $model->toSearchableArray());
-        })->values()->all());
+            $searchableArray = $model->toSearchableArray();
+
+            if (empty($searchableArray)) {
+                return;
+            }
+
+            return array_merge(['objectID' => $model->getKey()], $searchableArray);
+        })->filter()->values()->all());
     }
 
     /**
@@ -136,7 +142,9 @@ class AlgoliaEngine extends Engine
         return collect($results['hits'])->map(function ($hit) use ($model, $models) {
             $key = $hit[$model->getKeyName()];
 
-            return isset($models[$key]) ? $models[$key] : null;
+            if (isset($models[$key])) {
+                return $models[$key];
+            }
         })->filter();
     }
 }

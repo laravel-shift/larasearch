@@ -13,18 +13,16 @@ class ElasticEngineTest extends AbstractTestCase
     public function test_update_adds_objects_to_index()
     {
         $client = Mockery::mock('Elasticsearch\Client');
-        $client->shouldReceive('get');
-        $client->shouldReceive('update');
-        $client->shouldReceive('index');
+        $client->shouldReceive('bulk');
 
-        $engine = new ElasticEngine($client, 'my_index');
+        $engine = new ElasticEngine($client, 'index_name');
         $engine->update(Collection::make([new ElasticEngineTestModel]));
     }
 
     public function test_delete_removes_objects_to_index()
     {
         $client = Mockery::mock('Elasticsearch\Client');
-        $client->shouldReceive('delete');
+        $client->shouldReceive('bulk');
 
         $engine = new ElasticEngine($client, 'my_index');
         $engine->delete(Collection::make([new ElasticEngineTestModel]));
@@ -37,6 +35,7 @@ class ElasticEngineTest extends AbstractTestCase
 
         $engine = new ElasticEngine($client, 'my_index');
         $builder = new Builder(new ElasticEngineTestModel, 'zonda');
+        $builder->where('foo', 1);
         $engine->search($builder);
     }
 
