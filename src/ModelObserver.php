@@ -54,11 +54,7 @@ class ModelObserver
      */
     public function created($model)
     {
-        if (static::syncingDisabledFor($model)) {
-            return;
-        }
-
-        $model->searchable();
+        $this->updateSearchable($model);
     }
 
     /**
@@ -69,11 +65,7 @@ class ModelObserver
      */
     public function updated($model)
     {
-        if (static::syncingDisabledFor($model)) {
-            return;
-        }
-
-        $model->searchable();
+        $this->updateSearchable($model);
     }
 
     /**
@@ -84,11 +76,7 @@ class ModelObserver
      */
     public function deleted($model)
     {
-        if (static::syncingDisabledFor($model)) {
-            return;
-        }
-
-        $model->unsearchable();
+        $this->updateSearchable($model, false);
     }
 
     /**
@@ -99,10 +87,21 @@ class ModelObserver
      */
     public function restored($model)
     {
+        $this->updateSearchable($model);
+    }
+
+    /**
+     * Update the model to be searchable or unsearchable.
+     *
+     * @param  \Illuminate\Database\Eloquent\Model  $model
+     * @return void
+     */
+    protected function updateSearchable($model, $searchable = true)
+    {
         if (static::syncingDisabledFor($model)) {
             return;
         }
 
-        $model->searchable();
+        return $searchable ? $model->searchable() : $model->unsearchable();
     }
 }

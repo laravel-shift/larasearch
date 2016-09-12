@@ -177,9 +177,9 @@ class ElasticEngine extends Engine
                     'filtered' => [
                         'filter' => [
                             'query' => [
-                                'query_string' => [
-                                    'query' => '*{$query->query}*',
-                                ]
+                                'simple_query_string' => [
+                                    'query' => $builder->query,
+                                ],
                             ],
                         ],
                         'query' => $options['filters'],
@@ -220,7 +220,7 @@ class ElasticEngine extends Engine
         return empty($filters) ? [] : [
             'bool' => [
                 'must' => $filters,
-            ]
+            ],
         ];
     }
 
