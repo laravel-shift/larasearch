@@ -188,16 +188,7 @@ class ElasticEngine extends Engine
             'type' => $builder->index ?: $builder->model->searchableAs(),
             'body' => [
                 'query' => [
-                    'filtered' => [
-                        'filter' => [
-                            'query' => [
-                                'simple_query_string' => [
-                                    'query' => $builder->query,
-                                ],
-                            ],
-                        ],
-                        'query' => $options['filters'],
-                    ],
+                    'filtered' => $options['filters'],
                 ],
             ],
         ];
@@ -221,19 +212,42 @@ class ElasticEngine extends Engine
      */
     protected function filters(Builder $builder)
     {
-        $filters = [];
+        $termFilters = [];
+
+        $matchQueries[] = [
+            'match' => [
+                '_all' => [
+                    'query' => $builder->query,
+                    'fuzziness' => 1,
+                ]
+            ]
+        ];
 
         foreach ($builder->wheres as $field => $value) {
-            $filters[] = [
-                'match' => [
-                    $field => $value,
-                ],
-            ];
+            if (is_numeric($value)) {
+                $termFilters[] = [
+                    'term' => [
+                        $field => $value,
+                    ],
+                ];
+            } elseif (is_string($value)) {
+                $matchQueries[] = [
+                    'match' => [
+                        $field => [
+                            'query' => $value,
+                            'operator' => 'and',
+                        ],
+                    ],
+                ];
+            }
         }
 
-        return empty($filters) ? [] : [
-            'bool' => [
-                'must' => $filters,
+        return [
+            'filter' => $termFilters,
+            'query' => [
+                'bool' => [
+                    'must' => $matchQueries,
+                ]
             ],
         ];
     }
