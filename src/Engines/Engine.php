@@ -46,7 +46,7 @@ abstract class Engine
      *
      * @param  mixed  $results
      * @param  \Illuminate\Database\Eloquent\Model  $model
-     * @return Collection
+     * @return \Illuminate\Database\Eloquent\Collection
      */
     abstract public function map($results, $model);
 
@@ -54,7 +54,7 @@ abstract class Engine
      * Get the results of the given query mapped onto models.
      *
      * @param  \Gtk\Larasearch\Builder  $builder
-     * @return Collection
+     * @return \Illuminate\Database\Eloquent\Collection
      */
     public function get(Builder $builder)
     {

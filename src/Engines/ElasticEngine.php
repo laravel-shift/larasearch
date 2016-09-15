@@ -14,6 +14,20 @@ use Elasticsearch\Connections\ConnectionFactoryInterface;
 class ElasticEngine extends Engine
 {
     /**
+     * The Elastic client.
+     *
+     * @var \Elasticsearch\Client
+     */
+    protected $elastic;
+
+    /**
+     * The Elastic index.
+     *
+     * @var string
+     */
+    protected $index;
+
+    /**
      * Create a new engine instance.
      *
      * @param  \Elasticsearch\Client $elastic
