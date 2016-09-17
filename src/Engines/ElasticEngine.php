@@ -101,7 +101,7 @@ class ElasticEngine extends Engine
                     '_index' => $this->index,
                     '_type' => $model->searchableAs(),
                     '_id' => $model->getKey(),
-                ]
+                ],
             ]);
 
             $body->push($searchableArray);
@@ -129,7 +129,7 @@ class ElasticEngine extends Engine
                     '_index' => $this->index,
                     '_type' => $model->searchableAs(),
                     '_id' => $model->getKey(),
-                ]
+                ],
             ]);
         });
 
@@ -185,7 +185,7 @@ class ElasticEngine extends Engine
     {
         $params = [
             'index' => $this->index,
-            'type' => $builder->index ?: $builder->model->searchableAs(),
+            'type' => $builder->model->searchableAs(),
             'body' => [
                 'query' => [
                     'filtered' => $options['filters'],
