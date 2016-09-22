@@ -2,24 +2,7 @@
 
 namespace Tests\Fixtures;
 
-use Illuminate\Database\Eloquent\Model;
-
-class ElasticEngineTestModel extends Model
+class ElasticEngineTestModel extends TestModel
 {
-    public $id = 1;
-
-    public function searchableAs()
-    {
-        return 'table';
-    }
-
-    public function getKey()
-    {
-        return $this->id;
-    }
-
-    public function toSearchableArray()
-    {
-        return ['id' => 1];
-    }
+    // 
 }

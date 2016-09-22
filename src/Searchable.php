@@ -48,6 +48,10 @@ trait Searchable
      */
     public function queueMakeSearchable($models)
     {
+        if ($models->isEmpty()) {
+            return false;
+        }
+
         if (! config('larasearch.queue')) {
             return $models->first()->searchableUsing()->update($models);
         }
@@ -64,6 +68,10 @@ trait Searchable
      */
     public function queueRemoveFromSearch($models)
     {
+        if ($models->isEmpty()) {
+            return false;
+        }
+        
         return $models->first()->searchableUsing()->delete($models);
     }
 
