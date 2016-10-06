@@ -23,10 +23,9 @@ class ClearCommand extends Command
     /**
      * Execute the console command.
      *
-     * @param  \Illuminate\Contracts\Events\Dispatcher  $events
      * @return void
      */
-    public function handle(Dispatcher $events)
+    public function handle()
     {
         $class = $this->argument('model');
 
