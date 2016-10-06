@@ -2,9 +2,9 @@
 
 namespace Gtk\Larasearch;
 
-use Gtk\Larasearch\Events\ModelsImported;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Scope;
+use Gtk\Larasearch\Events\ModelsImported;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 
 class SearchableScope implements Scope

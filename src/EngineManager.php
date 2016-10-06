@@ -3,8 +3,8 @@
 namespace Gtk\Larasearch;
 
 use Illuminate\Support\Manager;
-use Gtk\Larasearch\Engines\NullEngine;
 use AlgoliaSearch\Client as Algolia;
+use Gtk\Larasearch\Engines\NullEngine;
 use Gtk\Larasearch\Engines\AlgoliaEngine;
 use Gtk\Larasearch\Engines\ElasticEngine;
 
