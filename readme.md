@@ -58,6 +58,10 @@ Since Larasearch searches return a collection of Eloquent models, you may even r
         return App\Order::search($request->search)->get();
     });
 
+The `search` method also accepts an array that will be used to perform an advanced search. Check [Elastic document](https://www.elastic.co/guide/en/elasticsearch/client/php-api/current/_search_operations.html) for more information.
+
+    $orders = App\Order::search(['query' => ['match' => ['title' => 'Star Trek']]])->get();
+
 ## License
 
 Larasearch is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
