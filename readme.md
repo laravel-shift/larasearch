@@ -46,9 +46,9 @@ When using the Elastic driver, you should configure your Elastic `index` and `ho
 
     composer require elasticsearch/elasticsearch
     
-You may begin searching a model using the `search` method. The search method accepts an array or a raw JSON string that will be used to search your models. Check [Elastic document](https://www.elastic.co/guide/en/elasticsearch/client/php-api/current/_search_operations.html) for more information. You should then chain the `get` method onto the search query to retrieve the Eloquent models that match the given search query:
+You may begin searching a model using the `search` method. The search method accepts a single string that will be used to search your models. You should then chain the `get` method onto the search query to retrieve the Eloquent models that match the given search query:
 
-    $orders = App\Order::search(['query' => ['match' => ['title' => 'Star Trek']]])->get();
+    $orders = App\Order::search('Star Trek')->get();
 
 Since Larasearch searches return a collection of Eloquent models, you may even return the results directly from a route or controller and they will automatically be converted to JSON:
 
@@ -57,7 +57,7 @@ Since Larasearch searches return a collection of Eloquent models, you may even r
     Route::get('/search', function (Request $request) {
         return App\Order::search($request->search)->get();
     });
-    
+
 ## License
 
 Larasearch is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
