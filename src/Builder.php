@@ -130,11 +130,13 @@ class Builder
      * @param  int|null  $page
      * @return \Illuminate\Contracts\Pagination\Paginator
      */
-    public function paginate($perPage = 15, $pageName = 'page', $page = null)
+    public function paginate($perPage = null, $pageName = 'page', $page = null)
     {
         $engine = $this->engine();
 
         $page = $page ?: Paginator::resolveCurrentPage($pageName);
+
+        $perPage = $perPage ?: $this->model->getPerPage();
 
         $results = Collection::make($engine->map(
             $rawResults = $engine->paginate($this, $perPage, $page), $this->model

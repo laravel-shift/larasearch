@@ -148,7 +148,7 @@ class ElasticEngine extends Engine
     public function search(Builder $builder)
     {
         return $this->performSearch($builder, [
-            'filters' => $this->filters($builder),
+            'query' => $this->buildRawQuery($builder),
             'size' => $builder->limit ?: 10000,
         ]);
     }
@@ -164,7 +164,7 @@ class ElasticEngine extends Engine
     public function paginate(Builder $builder, $perPage, $page)
     {
         $results = $this->performSearch($builder, [
-            'filters' => $this->filters($builder),
+            'query' => $this->buildRawQuery($builder),
             'size' => $perPage,
             'from' => ($page - 1) * $perPage,
         ]);
@@ -186,11 +186,7 @@ class ElasticEngine extends Engine
         $params = [
             'index' => $this->index,
             'type' => $builder->model->searchableAs(),
-            'body' => [
-                'query' => [
-                    'filtered' => $options['filters'],
-                ],
-            ],
+            'body' => $options['query'],
         ];
 
         if (isset($options['size'])) {
@@ -205,13 +201,17 @@ class ElasticEngine extends Engine
     }
 
     /**
-     * Get the filter array for the query.
+     * Build raw query.
      *
      * @param  \Gtk\Larasearch\Builder  $builder
      * @return array
      */
-    protected function filters(Builder $builder)
+    protected function buildRawQuery(Builder $builder)
     {
+        if ($this->isRawQuery($builder->query)) {
+            return $builder->query;
+        }
+
         $termFilters = [];
 
         $matchQueries[] = [
@@ -243,13 +243,28 @@ class ElasticEngine extends Engine
         }
 
         return [
-            'filter' => $termFilters,
             'query' => [
-                'bool' => [
-                    'must' => $matchQueries,
-                ]
+                'filtered' => [
+                    'filter' => $termFilters,
+                    'query' => [
+                        'bool' => [
+                            'must' => $matchQueries,
+                        ]
+                    ],
+                ],
             ],
         ];
+    }
+
+    /**
+     * Check if the query is raw query.
+     *
+     * @param  mixed
+     * @return true|false
+     */
+    protected function isRawQuery($query)
+    {
+        return is_array($query);
     }
 
     /**
