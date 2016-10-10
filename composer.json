@@ -3,7 +3,7 @@
     "description": "A driver based solution to searching your Eloquent models supports Laravel 5.2 and Elasticsearch engine.",
     "keywords": [
         "algolia",
-        "elastic",
+        "elasticsearch",
         "laravel",
         "search"
     ],
@@ -46,7 +46,7 @@
     },
     "suggest": {
         "algolia/algoliasearch-client-php": "Required to use the Algolia engine.",
-        "elasticsearch/elasticsearch": "Required to use the Elastic engine."
+        "elasticsearch/elasticsearch": "Required to use the Elasticsearch engine."
     },
     "minimum-stability": "dev",
     "prefer-stable": true
