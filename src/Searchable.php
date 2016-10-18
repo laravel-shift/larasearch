@@ -49,7 +49,7 @@ trait Searchable
     public function queueMakeSearchable($models)
     {
         if ($models->isEmpty()) {
-            return false;
+            return;
         }
 
         if (! config('larasearch.queue')) {
@@ -69,7 +69,7 @@ trait Searchable
     public function queueRemoveFromSearch($models)
     {
         if ($models->isEmpty()) {
-            return false;
+            return;
         }
         
         return $models->first()->searchableUsing()->delete($models);
@@ -93,7 +93,9 @@ trait Searchable
      */
     public static function makeAllSearchable()
     {
-        (new static)->newQuery()->searchable();
+        $self = new static();
+
+        $self->newQuery()->orderBy($self->getKeyName())->searchable();
     }
 
     /**
@@ -113,7 +115,9 @@ trait Searchable
      */
     public static function removeAllFromSearch()
     {
-        (new static)->newQuery()->unsearchable();
+        $self = new static();
+
+        $self->newQuery()->orderBy($self->getKeyName())->unsearchable();
     }
 
     /**
