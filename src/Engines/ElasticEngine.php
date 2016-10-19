@@ -283,7 +283,7 @@ class ElasticEngine extends Engine
         $keys = collect($results['hits']['hits'])->pluck('_id')->values()->all();
 
         $models = $model->whereIn(
-            $model->getKeyName(), $keys
+            $model->getQualifiedKeyName(), $keys
         )->get()->keyBy($model->getKeyName());
 
         return collect($results['hits']['hits'])->map(function ($hit) use ($model, $models) {
