@@ -197,6 +197,14 @@ class ElasticEngine extends Engine
             $params['from'] = $options['from'];
         }
 
+        if ($builder->callback) {
+            return call_user_func(
+                $builder->callback,
+                $this->elastic,
+                $query
+            );
+        }
+
         return $this->elastic->search($params);
     }
 
@@ -212,9 +220,9 @@ class ElasticEngine extends Engine
             return $builder->query;
         }
 
-        $termFilters = [];
+        $filters = [];
 
-        $matchQueries[] = [
+        $matches[] = [
             'match' => [
                 '_all' => [
                     'query' => $builder->query,
@@ -225,13 +233,13 @@ class ElasticEngine extends Engine
 
         foreach ($builder->wheres as $field => $value) {
             if (is_numeric($value)) {
-                $termFilters[] = [
+                $filters[] = [
                     'term' => [
                         $field => $value,
                     ],
                 ];
             } elseif (is_string($value)) {
-                $matchQueries[] = [
+                $matches[] = [
                     'match' => [
                         $field => [
                             'query' => $value,
@@ -245,10 +253,10 @@ class ElasticEngine extends Engine
         return [
             'query' => [
                 'filtered' => [
-                    'filter' => $termFilters,
+                    'filter' => $filters,
                     'query' => [
                         'bool' => [
-                            'must' => $matchQueries,
+                            'must' => $matches,
                         ]
                     ],
                 ],

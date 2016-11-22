@@ -111,9 +111,20 @@ class AlgoliaEngine extends Engine
      */
     protected function performSearch(Builder $builder, array $options = [])
     {
-        return $this->algolia->initIndex(
+        $algolia = $this->algolia->initIndex(
             $builder->index ?: $builder->model->searchableAs()
-        )->search($builder->query, $options);
+        );
+
+        if ($builder->callback) {
+            return call_user_func(
+                $builder->callback,
+                $algolia,
+                $builder->query,
+                $options
+            );
+        }
+
+        return $algolia->search($builder->query, $options);
     }
 
     /**
