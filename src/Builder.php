@@ -43,6 +43,13 @@ class Builder
     public $wheres = [];
 
     /**
+     * The "order" that should be applied to the search.
+     *
+     * @var array
+     */
+    public $orders = [];
+
+    /**
      * The "limit" that should be applied to the search.
      *
      * @var int
@@ -94,6 +101,16 @@ class Builder
     public function where($field, $value)
     {
         $this->wheres[$field] = $value;
+
+        return $this;
+    }
+
+    public function orderBy($field, $direction = 'asc')
+    {
+        $this->orders[] = [
+            'field' => $field,
+            'direction' => strtolower($direction) == 'asc' ? 'asc' : 'desc',
+        ];
 
         return $this;
     }
