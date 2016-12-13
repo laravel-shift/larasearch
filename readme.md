@@ -1,6 +1,6 @@
 # Larasearch
 
-[![Build Status](https://travis-ci.org/cuonggt/larasearch.svg?branch=master)](https://travis-ci.org/cuonggt/larasearch)
+[![Build Status](https://travis-ci.org/gtkvn/larasearch.svg?branch=master)](https://travis-ci.org/gtkvn/larasearch)
 [![Latest Stable Version](https://poser.pugx.org/gtk/larasearch/v/stable)](https://packagist.org/packages/gtk/larasearch)
 [![Total Downloads](https://poser.pugx.org/gtk/larasearch/downloads)](https://packagist.org/packages/gtk/larasearch)
 [![Latest Unstable Version](https://poser.pugx.org/gtk/larasearch/v/unstable)](https://packagist.org/packages/gtk/larasearch)
