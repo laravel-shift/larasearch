@@ -24,6 +24,7 @@ class BuilderTest extends AbstractTestCase
         
         $engine->shouldReceive('paginate');
         $engine->shouldReceive('map')->andReturn(Collection::make([new StdClass]));
+        $engine->shouldReceive('getTotalCount');
 
         $builder->paginate();
     }
