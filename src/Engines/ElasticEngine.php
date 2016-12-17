@@ -288,7 +288,7 @@ class ElasticEngine extends Engine
             return Collection::make();
         }
 
-        $keys = collect($results['hits']['hits'])->pluck('_id')->values()->all();
+        $keys = $this->getIds($results);
 
         $models = $model->whereIn(
             $model->getQualifiedKeyName(), $keys
@@ -301,5 +301,19 @@ class ElasticEngine extends Engine
                 return $models[$key];
             }
         })->filter();
+    }
+
+    /**
+     * Pluck and return the primary keys of the results.
+     *
+     * @param  mixed  $results
+     * @return \Illuminate\Support\Collection
+     */
+    public function getIds($results)
+    {
+        return collect($results['hits']['hits'])
+            ->pluck('_id')
+            ->values()
+            ->all();
     }
 }

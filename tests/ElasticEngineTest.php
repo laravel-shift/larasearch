@@ -118,7 +118,7 @@ class ElasticEngineTest extends AbstractTestCase
     }
 
     /**
-     * @return \Laravel\Scout\Engines\ElasticEngine
+     * @return \Gtk\Larasearch\Engines\ElasticEngine
      */
     protected function getRealElasticEngine()
     {

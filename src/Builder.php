@@ -2,8 +2,9 @@
 
 namespace Gtk\Larasearch;
 
-use Gtk\Larasearch\Paginator;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class Builder
 {
@@ -129,6 +130,16 @@ class Builder
     }
 
     /**
+     * Get the keys of search results.
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function keys()
+    {
+        return $this->engine()->keys($this);
+    }
+
+    /**
      * Get the first result from the search.
      *
      * @return \Illuminate\Database\Eloquent\Model
@@ -154,7 +165,7 @@ class Builder
      * @param  int  $perPage
      * @param  string  $pageName
      * @param  int|null  $page
-     * @return \Illuminate\Contracts\Pagination\Paginator
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
     public function paginate($perPage = null, $pageName = 'page', $page = null)
     {
@@ -168,13 +179,12 @@ class Builder
             $rawResults = $engine->paginate($this, $perPage, $page), $this->model
         ));
 
-        $paginator = (new Paginator($results, $perPage, $page, [
+        $paginator = (new LengthAwarePaginator($results, $this->total, $perPage, $page, [
             'path' => Paginator::resolveCurrentPath(),
             'pageName' => $pageName,
         ]));
 
-        return $paginator->appends('query', $this->query)
-                         ->hasMorePagesWhen(($this->total / $perPage) > $page);
+        return $paginator->appends('query', $this->query);
     }
 
     /**

@@ -51,6 +51,17 @@ abstract class Engine
     abstract public function map($results, $model);
 
     /**
+     * Get the results of the query as a Collection of primary keys.
+     *
+     * @param  \Gtk\Larasearch\Builder  $builder
+     * @return \Illuminate\Support\Collection
+     */
+    public function keys(Builder $builder)
+    {
+        return $this->getIds($this->search($builder));
+    }
+
+    /**
      * Get the results of the given query mapped onto models.
      *
      * @param  \Gtk\Larasearch\Builder  $builder
