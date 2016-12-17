@@ -179,7 +179,7 @@ class Builder
             $rawResults = $engine->paginate($this, $perPage, $page), $this->model
         ));
 
-        $paginator = (new LengthAwarePaginator($results, $this->total, $perPage, $page, [
+        $paginator = (new LengthAwarePaginator($results, $engine->getTotalCount($rawResults), $perPage, $page, [
             'path' => Paginator::resolveCurrentPath(),
             'pageName' => $pageName,
         ]));

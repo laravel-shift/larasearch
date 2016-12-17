@@ -97,7 +97,7 @@ class AlgoliaEngine extends Engine
             'page' => $page - 1,
         ]);
 
-        $builder->total = $results['nbHits'];
+        $builder->total = $this->getTotalCount($results);
 
         return $results;
     }
@@ -180,5 +180,16 @@ class AlgoliaEngine extends Engine
             ->pluck('objectID')
             ->values()
             ->all();
+    }
+
+    /**
+     * Get the total count from a raw result returned by the engine.
+     *
+     * @param  mixed  $results
+     * @return int
+     */
+    public function getTotalCount($results)
+    {
+        return $results['nbHits'];
     }
 }

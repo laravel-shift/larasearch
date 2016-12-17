@@ -64,4 +64,26 @@ class NullEngine extends Engine
     {
         return Collection::make();
     }
+
+    /**
+     * Pluck and return the primary keys of the results.
+     *
+     * @param  mixed  $results
+     * @return \Illuminate\Support\Collection
+     */
+    public function getIds($results)
+    {
+        return Collection::make();
+    }
+
+    /**
+     * Get the total count from a raw result returned by the engine.
+     *
+     * @param  mixed  $results
+     * @return int
+     */
+    public function getTotalCount($results)
+    {
+        return count($results);
+    }
 }

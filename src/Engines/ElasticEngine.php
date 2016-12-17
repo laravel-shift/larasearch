@@ -169,7 +169,7 @@ class ElasticEngine extends Engine
             'from' => ($page - 1) * $perPage,
         ]);
 
-        $builder->total = $results['hits']['total'];
+        $builder->total = $this->getTotalCount($results);
 
         return $results;
     }
@@ -315,5 +315,16 @@ class ElasticEngine extends Engine
             ->pluck('_id')
             ->values()
             ->all();
+    }
+
+    /**
+     * Get the total count from a raw result returned by the engine.
+     *
+     * @param  mixed  $results
+     * @return int
+     */
+    public function getTotalCount($results)
+    {
+        return $results['hits']['total'];
     }
 }
