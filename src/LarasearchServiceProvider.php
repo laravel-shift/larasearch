@@ -3,7 +3,7 @@
 namespace Gtk\Larasearch;
 
 use Illuminate\Support\ServiceProvider;
-use Gtk\Larasearch\Console\ClearCommand;
+use Gtk\Larasearch\Console\FlushCommand;
 use Gtk\Larasearch\Console\ImportCommand;
 
 class LarasearchServiceProvider extends ServiceProvider
@@ -22,7 +22,7 @@ class LarasearchServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 ImportCommand::class,
-                ClearCommand::class,
+                FlushCommand::class,
             ]);
 
             $this->publishes([
